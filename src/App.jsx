@@ -1,21 +1,36 @@
+import { useState } from "react";
+
 export default function App() {
-  const students = [
-    { name: "Alice", age: 17, grade: "A" },
-    { name: "Bob", age: 18, grade: "B" },
-    { name: "Charlie", age: 16, grade: "C" },
-    { name: "Diana", age: 19, grade: "D" },
-  ];
+  const [input, setInput] = useState("");
+  const [result, setResult] = useState(0);
 
-  // TODO: filter를 사용하여 18세 이상의 학생들만 선택하세요.
-  const filteredStudents = students.filter(/* 여기에 코드 작성 */);
+  const add = () => {
+    if (input === "") return alert("값이 입력되지 않았습니다");
+    setResult((prev) => prev + parseInt(input));
+    setInput("");
+  };
+  const sub = () => {
+    if (input === "") return alert("값이 입력되지 않았습니다");
+    setResult((prev) => prev - parseInt(input));
+    setInput("");
+  };
 
+  const reset = () => {
+    setResult(0);
+  };
   return (
     <div>
-      <h1>학생 목록</h1>
-      <ul>
-        {/* TODO: map을 사용해서 filteredStudents를 여기에 렌더링하세요. */}
-        {/* TODO: 학생이름을 클릭하면 나이와 점수가 alert 돼야 해요.*/}
-      </ul>
+      <h1>덧셈과 뺄셈이 가능한 앱 만들기</h1>
+      <div>
+        <input value={input} onChange={(e) => setInput(e.target.value)} /> 만큼을
+        <button onClick={add}>더할게요</button> <button onClick={sub}>뺄게요</button>
+        <button onClick={reset}>초기화</button>
+      </div>
+      <hr />
+      <div>
+        <h3>결과</h3>
+        <p>{result}</p>
+      </div>
     </div>
   );
 }
